@@ -16,23 +16,27 @@ Service for storing CV Generator news (articles).
 ```
 docker network create cv-generator-network
 ```
-
-1. Update and install Composer packages
-```
-make bash
-```
-
-```
-composer update
-```
-
-2Build and up project with Docker Compose
+1. Build and up project with Docker Compose
 
 ```
 docker-compose up -d --build
 ```
 
-3. Open `http://localhost:8000` in your browser, you should see the Symfony's welcome page.
+2. Update and install Composer packages
+```
+make bash
+```
+```
+composer update
+```
+3. Migrate and load fixtures (in container)
+```
+php bin/console doctrine:migrations:migrate
+```
+```
+php bin/console doctrine:fixtures:load
+```
+4. Open `http://localhost:8000` in your browser, you should see the Symfony's welcome page.
 
 ## Using
 
