@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\NewsRepository;
+use App\Services\News\Enums\NewsStatusesEnum;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -46,9 +47,9 @@ class News
     #[Groups(['news:read', 'news:write'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(type: 'news_status_enum', nullable: true)]
     #[Groups(['news:read', 'news:write'])]
-    private ?string $status = null;
+    private ?NewsStatusesEnum $status = null;
 
     public function getId(): ?int
     {
@@ -115,12 +116,12 @@ class News
         return $this;
     }
 
-    public function getStatus(): ?string
+    public function getStatus(): ?NewsStatusesEnum
     {
         return $this->status;
     }
 
-    public function setStatus(string $status): static
+    public function setStatus(?NewsStatusesEnum $status): static
     {
         $this->status = $status;
 

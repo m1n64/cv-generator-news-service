@@ -7,4 +7,9 @@ enum NewsStatusesEnum: string
 {
     case DRAFT = 'draft';
     case PUBLISHED = 'published';
+
+    public static function getValues(): array
+    {
+        return [self::DRAFT->value, self::PUBLISHED->value];
+    }
 }
